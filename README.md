@@ -1,2 +1,2 @@
 # FilTik
-Filter TikTok Saved Videos, Reposted Videos & Like Videos Extension
+Filter Shuffle & Program TikTok Profile Videos, Saved Videos, Reposted Videos & Like Videos Extension
