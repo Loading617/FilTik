@@ -1,2 +1,2 @@
 # FilTik
-TikTok Save Videos and Liked Videos Extension
+A TikTok Saved Video and Like Videos Extension
