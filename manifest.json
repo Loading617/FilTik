@@ -1,0 +1,20 @@
+{
+    "manifest_version": 3,
+    "name": "FilTok",
+    "version": "1.0",
+    "description": "Filter TikTok videos and sync presets with Google Drive backup.",
+    "permissions": [
+      "storage",
+      "identity"
+    ],
+    "host_permissions": [
+      "https://www.googleapis.com/*"
+    ],
+    "background": {
+      "service_worker": "background.js"
+    },
+    "action": {
+      "default_popup": "popup.html"
+    }
+  }
+  
