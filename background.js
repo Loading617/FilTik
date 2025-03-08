@@ -3,6 +3,8 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
         
         chrome.storage.local.get(["sortingMethod"], (data) => {
             sendResponse({ sortingMethod: data.sortingMethod || "latest" });
+            sendResponse({ sortingMethod: data.sortingMethod || "popular" });
+            sendResponse({ sortingMethod: data.sortingMethod || "oldest" });
         });
         return true;
     }
