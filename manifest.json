@@ -2,21 +2,16 @@
     "manifest_version": 3,
     "name": "FilTik",
     "version": "1.0",
-    "description": "Filter TikTok videos and sync presets with Google Drive backup.",
-    "permissions": [
-      "storage",
-      "identity"
+    "description": "Sort and shuffle TikTok videos by Latest, Popular, and Oldest.",
+    "permissions": ["storage"],
+    "host_permissions": ["https://www.tiktok.com/*"],
+    "content_scripts": [
+      {
+        "matches": ["https://www.tiktok.com/*"],
+        "js": ["content.js"],
+        "css": ["styles.css"]
+      }
     ],
-    "host_permissions": [
-      "https://www.googleapis.com/*"
-    ],
-    "oauth2": {
-      "client_id": "YOUR_CLIENT_ID",
-      "scopes": ["https://www.googleapis.com/auth/drive.file"]
-    },
-    "background": {
-      "service_worker": "background.js"
-    },
     "action": {
       "default_popup": "popup.html",
       "default_icon": {
@@ -26,11 +21,8 @@
         "128": "icons/icon128.png"
       }
     },
-    "icons": {
-      "16": "icons/icon16.png",
-      "32": "icons/icon32.png",
-      "48": "icons/icon48.png",
-      "128": "icons/icon128.png"
+    "background": {
+      "service_worker": "background.js"
     }
   }
   
