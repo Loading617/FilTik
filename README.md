@@ -1,5 +1,5 @@
 <p align="center">
-	<img src="FilTik.png" width="300" height="300" alt="FilTik">  
+	<img src="FilTik.jpg" width="300" height="300" alt="FilTik">  
 </p>
 
 # FilTik
