@@ -18,29 +18,37 @@ function sortVideos(method) {
     videoArray.forEach(video => parent.appendChild(video));
 }
 
+function addCustomButton() {
+    let filterBar = document.querySelector("div[data-e2e='user-tab-list']");
+    
+    if (filterBar && !document.querySelector(".tiktok-custom-sort-btn")) {
+        let button = document.createElement("button");
+        button.innerText = "🔀 Shuffle & Program";
+        button.classList.add("tiktok-custom-sort-btn");
+
+        filterBar.appendChild(button);
+
+        button.addEventListener("click", () => {
+            let sortingMethod = prompt("Sort by: latest, popular, oldest, shuffle");
+            if (sortingMethod) {
+                sortVideos(sortingMethod);
+                chrome.runtime.sendMessage({ action: "setSortingPreference", sortingMethod });
+            }
+        });
+    }
+}
+
 function applyAutoFilter() {
-    chrome.runtime.sendMessage({ action: "getSortingPreference" }, (response) => {
-        if (response.sortingMethod) {
-            sortVideos(response.sortingMethod);
+    chrome.storage.local.get(["sortingMethod", "autoFilter"], (data) => {
+        if (data.autoFilter) {
+            sortVideos(data.sortingMethod || "latest");
         }
     });
 }
 
 window.addEventListener("load", () => {
-    applyAutoFilter();
-
-    let button = document.createElement("button");
-    button.innerText = "🔀 Shuffle & Sort";
-    button.classList.add("tiktok-extension-button");
-
-    let target = document.querySelector("header") || document.body;
-    if (target) target.appendChild(button);
-
-    button.addEventListener("click", () => {
-        let sortingMethod = prompt("Sort by: latest, popular, oldest, shuffle");
-        if (sortingMethod) {
-            sortVideos(sortingMethod);
-            chrome.runtime.sendMessage({ action: "setSortingPreference", sortingMethod });
-        }
-    });
+    setTimeout(() => {
+        addCustomButton();
+        applyAutoFilter();
+    }, 3000);
 });
