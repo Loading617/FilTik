@@ -1,14 +1,26 @@
-.tiktok-custom-sort-btn {
+.tiktok-sort-btn {
     background: #ff2d55;
     color: white;
     border: none;
-    padding: 8px 12px;
+    padding: 6px 12px;
     font-size: 14px;
     border-radius: 5px;
     cursor: pointer;
-    margin-left: 10px;
+    margin: 5px;
 }
 
-.tiktok-custom-sort-btn:hover {
+.tiktok-sort-btn:hover {
     background: #e6004c;
+}
+
+.tiktok-favorites-sort-container {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 10px;
+}
+
+.tiktok-liked-sort-container {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 10px;
 }
