@@ -77,4 +77,13 @@ chrome.storage.sync.get(["autoFilterType", "autoFilterEnabled", "minLikes", "min
     if (data.endDate) document.getElementById("endDate").value = data.endDate;
 
     updatePresetList();
+
+    document.getElementById("backupDrive").addEventListener("click", () => {
+        chrome.runtime.sendMessage({ action: "backup" });
+    });
+    
+    document.getElementById("restoreDrive").addEventListener("click", () => {
+        chrome.runtime.sendMessage({ action: "restore" });
+    });
+    
 });
