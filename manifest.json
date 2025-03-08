@@ -7,8 +7,9 @@
     "host_permissions": ["https://www.tiktok.com/*"],
     "content_scripts": [
       {
-        "matches": ["https://www.tiktok.com/*"],
+        "matches": ["://www.tiktok.com/*"],
         "js": ["content.js"],
+        "run_at": "document_idle",
         "css": ["styles.css"]
       }
     ],
