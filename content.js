@@ -32,6 +32,9 @@ window.addEventListener("load", () => {
     let button = document.createElement("button");
     button.innerText = "🔀 Shuffle";
     button.innerText = "📋 Program";
+    button.innerText = " ⏳ Oldest";
+    button.innerText = " 🔥 Popular";
+    button.innerText = "📅 Latest";
     button.classList.add("tiktok-extension-button");
 
     let target = document.querySelector("header") || document.body;
