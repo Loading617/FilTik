@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FilTik</title>
+    <style>
+        body { width: 220px; font-family: Helvetica, sans-serif; }
+        button, input, label, select { width: 100%; margin: 5px 0; padding: 10px; }
+        input, select { padding: 5px; }
+        label { display: flex; align-items: center; justify-content: space-between; }
+    </style>
+</head>
+<body>
+    <h3>FilTik</h3>
+    
+    <button id="oldest">Oldest</button>
+    <button id="popular">Popular</button>
+    <button id="newest">Newest</button>
+    <button id="shuffle">Shuffle</button>
+    <button id="program">Program</button>
+    
+    <h4>Custom Filters</h4>
+    <label>Min Likes <input type="number" id="minLikes" min="0" placeholder="0"></label>
+    <label>Min Comments <input type="number" id="minComments" min="0" placeholder="0"></label>
+    <label>From Date <input type="date" id="startDate"></label>
+    <label>To Date <input type="date" id="endDate"></label>
+
+    <h4>Presets</h4>
+    <select id="presetList"></select>
+    <input type="text" id="presetName" placeholder="Preset Name">
+    <button id="savePreset">Save Preset</button>
+    <button id="applyPreset">Apply Preset</button>
+    <button id="deletePreset">Delete Preset</button>
+
+    <h4>Preset Management</h4>
+<button id="exportPresets">Export Presets</button>
+<input type="file" id="importPresets" accept=".json">
+<button id="importButton">Import Presets</button>
+
+    <h4>Cloud Backup</h4>
+<button id="backupDrive">Backup to Google Drive</button>
+<button id="restoreDrive">Restore from Google Drive</button>
+
+
+    <label>
+        <span>Auto-Filter</span>
+        <input type="checkbox" id="autoFilterToggle">
+    </label>
+
+    <script src="popup.js"></script>
+</body>
+</html>
