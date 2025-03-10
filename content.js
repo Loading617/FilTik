@@ -18,92 +18,30 @@ function sortVideos(method) {
     videoArray.forEach(video => parent.appendChild(video));
 }
 
-function createSortButton(text, sortMethod) {
-    let button = document.createElement("button");
-    button.innerText = text;
-    button.classList.add("tiktok-sort-btn");
-
-    button.addEventListener("click", () => {
-        sortVideos(sortMethod);
-        chrome.storage.local.set({ sortingMethod: sortMethod });
-    });
-
-    return button;
-}
-
-function addProfileSortButtons() {
-    let filterBar = document.querySelector("div[data-e2e='user-tab-list']");
-    
-    if (filterBar && !document.querySelector(".tiktok-sort-btn")) {
-        let shuffleButton = createSortButton("🔀 Shuffle", "shuffle");
-        let programButton = createSortButton("📋 Program", "popular");
-
-        filterBar.appendChild(shuffleButton);
-        filterBar.appendChild(programButton);
-    }
-}
-
-function addFavoritesSortButtons() {
-    let favoritesHeader = document.querySelector("div[data-e2e='favorites-page-header']");
-    
-    if (favoritesHeader && !document.querySelector(".tiktok-sort-btn")) {
-        let buttonContainer = document.createElement("div");
-        buttonContainer.classList.add("tiktok-favorites-sort-container");
-
-        let latestButton = createSortButton("📅 Latest", "latest");
-        let oldestButton = createSortButton("⏳ Oldest", "oldest");
-        let popularButton = createSortButton("🔥 Popular", "popular");
-        let shuffleButton = createSortButton("🔀 Shuffle", "shuffle");
-        let programButton = createSortButton("📋 Program", "popular");
-
-        buttonContainer.append(latestButton, oldestButton, popularButton, shuffleButton, programButton);
-
-        favoritesHeader.appendChild(buttonContainer);
-    }
-}
-
-function addLikedSortButtons() {
-    let likedHeader = document.querySelector("div[data-e2e='liked-videos-header']");
-    
-    if (likedHeader && !document.querySelector(".tiktok-sort-btn")) {
-        let buttonContainer = document.createElement("div");
-        buttonContainer.classList.add("tiktok-liked-sort-container");
-
-        let latestButton = createSortButton("📅 Latest", "latest");
-        let oldestButton = createSortButton("⏳ Oldest", "oldest");
-        let popularButton = createSortButton("🔥 Popular", "popular");
-        let shuffleButton = createSortButton("🔀 Shuffle", "shuffle");
-        let programButton = createSortButton("📋 Program", "popular");
-
-        buttonContainer.append(latestButton, oldestButton, popularButton, shuffleButton, programButton);
-
-        likedHeader.appendChild(buttonContainer);
-    }
-}
-
 function applyAutoFilter() {
-    chrome.storage.local.get(["sortingMethod", "autoFilter"], (data) => {
-        if (data.autoFilter) {
-            sortVideos(data.sortingMethod || "latest");
+    chrome.runtime.sendMessage({ action: "getSortingPreference" }, (response) => {
+        if (response.sortingMethod) {
+            sortVideos(response.sortingMethod);
         }
     });
 }
 
-function detectPageAndInjectButtons() {
-    if (window.location.pathname.includes("/video")) return;
-
-    if (window.location.pathname.includes("/favorites")) {
-        addFavoritesSortButtons();
-    } else if (window.location.pathname.includes("/liked")) {
-        addLikedSortButtons();
-    } else {
-        addProfileSortButtons();
-    }
-}
-
 window.addEventListener("load", () => {
-    setTimeout(() => {
-        detectPageAndInjectButtons();
-        applyAutoFilter();
-    }, 3000);
+    applyAutoFilter();
+
+    let button = document.createElement("button");
+    button.innerText = "🔀 Shuffle";
+    button.innerText = "📋 Program";
+    button.classList.add("tiktok-extension-button");
+
+    let target = document.querySelector("header") || document.body;
+    if (target) target.appendChild(button);
+
+    button.addEventListener("click", () => {
+        let sortingMethod = prompt("Sort by: latest, popular, oldest, shuffle");
+        if (sortingMethod) {
+            sortVideos(sortingMethod);
+            chrome.runtime.sendMessage({ action: "setSortingPreference", sortingMethod });
+        }
+    });
 });
