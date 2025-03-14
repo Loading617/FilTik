@@ -1,50 +1,16 @@
-function sortVideos(method) {
-    let videos = document.querySelectorAll("div[data-e2e='video-item']");
-    let videoArray = Array.from(videos);
+function updateFilterButtons() {
+    document.getElementById('shuffle').addEventListener('click', function() {
+        console.log('Shuffle button clicked');
+    });
 
-    if (!videoArray.length) return;
-
-    if (method === "latest") {
-        videoArray.sort((a, b) => new Date(b.dataset.timestamp) - new Date(a.dataset.timestamp));
-    } else if (method === "oldest") {
-        videoArray.sort((a, b) => new Date(a.dataset.timestamp) - new Date(b.dataset.timestamp));
-    } else if (method === "popular") {
-        videoArray.sort((a, b) => b.dataset.likes - a.dataset.likes);
-    } else if (method === "shuffle") {
-        videoArray.sort(() => Math.random() - 0.5);
-    }
-
-    let parent = videos[0].parentNode;
-    videoArray.forEach(video => parent.appendChild(video));
-}
-
-function applyAutoFilter() {
-    chrome.runtime.sendMessage({ action: "getSortingPreference" }, (response) => {
-        if (response.sortingMethod) {
-            sortVideos(response.sortingMethod);
-        }
+    document.getElementById('program').addEventListener('click', function() {
+        console.log('Program button clicked');
     });
 }
 
-window.addEventListener("load", () => {
-    applyAutoFilter();
+function initContentTasks() {
+    console.log('Content tasks initialized');
+    updateFilterButtons();
+}
 
-    let button = document.createElement("button");
-    button.innerText = "🔀 Shuffle";
-    button.innerText = "📋 Program";
-    button.innerText = " ⏳ Oldest";
-    button.innerText = " 🔥 Popular";
-    button.innerText = "📅 Latest";
-    button.classList.add("tiktok-extension-button");
-
-    let target = document.querySelector("header") || document.body;
-    if (target) target.appendChild(button);
-
-    button.addEventListener("click", () => {
-        let sortingMethod = prompt("Sort by: latest, popular, oldest, shuffle");
-        if (sortingMethod) {
-            sortVideos(sortingMethod);
-            chrome.runtime.sendMessage({ action: "setSortingPreference", sortingMethod });
-        }
-    });
-});
+initContentTasks();
