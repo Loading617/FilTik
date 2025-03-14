@@ -1,15 +1,49 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>FilTik</title>
+    <title>TikTok Filter Extension</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div id="profile-buttons"></div>
-    <div id="favorites-buttons"></div>
-    <div id="liked-buttons"></div>
-    <script src="profile.js"></script>
-    <script src="favorites.js"></script>
-    <script src="liked.js"></script>
+    <div class="filter-buttons">
+        <button id="oldest">Oldest</button>
+        <button id="popular">Popular</button>
+        <button id="newest">Newest</button>
+        <button id="shuffle">Shuffle</button>
+        <button id="program">Program</button>
+        <button id="reposts">Reposts</button>
+        <button id="favorites">Favorites</button>
+        <button id="liked">Liked</button>
+    </div>
+
+    <div class="favorites-header">
+        <button id="create-new-collection">Create New Collection</button>
+        <div class="filter-buttons">
+            <button id="oldest">Oldest</button>
+            <button id="popular">Popular</button>
+            <button id="newest">Newest</button>
+            <button id="shuffle">Shuffle</button>
+            <button id="program">Program</button>
+            <button id="reposts">Reposts</button>
+            <button id="favorites">Favorites</button>
+            <button id="liked">Liked</button>
+        </div>
+    </div>
+
+    <div class="liked-videos-header">
+        <div class="filter-buttons">
+            <button id="oldest">Oldest</button>
+            <button id="popular">Popular</button>
+            <button id="newest">Newest</button>
+            <button id="shuffle">Shuffle</button>
+            <button id="program">Program</button>
+            <button id="reposts">Reposts</button>
+            <button id="favorites">Favorites</button>
+            <button id="liked">Liked</button>
+        </div>
+    </div>
+
+    <script src="background.js"></script>
+    <script src="content.js"></script>
 </body>
 </html>
