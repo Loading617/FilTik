@@ -2,32 +2,23 @@
   "manifest_version": 3,
   "name": "FilTik",
   "version": "1.0",
-  "description": "Adds sorting, shuffling, and programming to TikTok.",
-  "permissions": ["storage"],
-  "host_permissions": ["https://www.tiktok.com/*"],
+  "description": "Shuffle and program TikTok videos by Latest, Popular, and Oldest.",
+  "permissions": ["activeTab", "storage"],
+  "background": {
+    "service_worker": "background.js"
+  },
   "content_scripts": [
     {
-      "matches": ["https://www.tiktok.com/*"],
-      "js": ["content.js"],
-      "css": ["styles.css"]
+      "matches": ["*://www.tiktok.com/*"],
+      "js": ["content.js"]
     }
   ],
   "action": {
     "default_popup": "popup.html",
     "default_icon": {
       "16": "icons/icon16.png",
-      "32": "icons/icon32.png",
       "48": "icons/icon48.png",
       "128": "icons/icon128.png"
     }
-  },
-  "background": {
-    "service_worker": "background.js"
-  },
-  "icons": {
-    "16": "icons/icon16.png",
-    "32": "icons/icon32.png",
-    "48": "icons/icon48.png",
-    "128": "icons/icon128.png"
   }
 }
