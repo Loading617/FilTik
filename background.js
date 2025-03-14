@@ -1,16 +1,18 @@
-chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
-    if (request.action === "getSortingPreference") {
-        
-        chrome.storage.local.get(["sortingMethod"], (data) => {
-            sendResponse({ sortingMethod: data.sortingMethod || "latest" });
-            sendResponse({ sortingMethod: data.sortingMethod || "popular" });
-            sendResponse({ sortingMethod: data.sortingMethod || "oldest" });
-        });
-        return true;
-    }
+function fetchData(url, callback) {
+    fetch(url)
+        .then(response => response.json())
+        .then(data => callback(data))
+        .catch(error => console.error('Error fetching data:', error));
+}
 
-    if (request.action === "setSortingPreference") {
-        
-        chrome.storage.local.set({ sortingMethod: request.sortingMethod });
-    }
-});
+function initBackgroundTasks() {
+    console.log('Background tasks initialized');
+
+    setInterval(() => {
+        fetchData('https://api.example.com/data', (data) => {
+            console.log('Fetched data:', data);
+        });
+    }, 60000);
+}
+
+initBackgroundTasks();
