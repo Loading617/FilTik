@@ -13,7 +13,23 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
 });
 
 function sortVideosOnPage(order) {
-  const videos = [...document.querySelectorAll('[data-e2e="user-post-item"]')];
+  const selectors = [
+      '[data-e2e="user-post-item"]',
+      '[data-e2e="repost-list-item"]',
+      '[data-e2e="favorite-list-item"]',
+      '[data-e2e="like-list-item"]'
+  ];
+
+  let videos = [];
+  let container;
+
+  for (let selector of selectors) {
+      videos = [...document.querySelectorAll(selector)];
+      if (videos.length > 0) {
+          container = videos[0].parentNode;
+          break;
+      }
+  }
 
   if (videos.length === 0) {
       alert("No videos found!");
@@ -21,21 +37,42 @@ function sortVideosOnPage(order) {
   }
 
   let sortedVideos;
+  
   if (order === "latest") {
-      sortedVideos = videos.reverse();
+      sortedVideos = videos.sort((a, b) => {
+          const dateA = extractDate(a);
+          const dateB = extractDate(b);
+          return dateB - dateA;
+      });
   } else if (order === "oldest") {
-      sortedVideos = videos;
+      sortedVideos = videos.sort((a, b) => {
+          const dateA = extractDate(a);
+          const dateB = extractDate(b);
+          return dateA - dateB;
+      });
   } else if (order === "popular") {
       sortedVideos = videos.sort((a, b) => {
-          const viewsA = parseInt(a.querySelector('[data-e2e="video-views"]').textContent.replace(/[^0-9]/g, ""));
-          const viewsB = parseInt(b.querySelector('[data-e2e="video-views"]').textContent.replace(/[^0-9]/g, ""));
+          const viewsA = extractViews(a);
+          const viewsB = extractViews(b);
           return viewsB - viewsA;
       });
   } else if (order === "shuffle") {
       sortedVideos = videos.sort(() => Math.random() - 0.5);
+  } else {
+      alert("Invalid sorting method!");
+      return;
   }
 
-  const container = videos[0].parentNode;
   container.innerHTML = "";
   sortedVideos.forEach(video => container.appendChild(video));
+}
+
+function extractViews(videoElement) {
+  const viewElement = videoElement.querySelector('[data-e2e="video-views"]');
+  return viewElement ? parseInt(viewElement.textContent.replace(/[^0-9]/g, "")) : 0;
+}
+
+function extractDate(videoElement) {
+  const dateElement = videoElement.querySelector('[data-e2e="video-upload-date"]');
+  return dateElement ? new Date(dateElement.textContent).getTime() : 0;
 }
