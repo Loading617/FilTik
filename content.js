@@ -9,7 +9,7 @@ function injectButton() {
     button.style.right = "24px";
     button.style.zIndex = "10000";
     button.style.padding = "10px";
-    button.style.backgroundColor = "#ff3b5c";
+    button.style.backgroundColor = "#25F4EE";
     button.style.color = "white";
     button.style.border = "none";
     button.style.borderRadius = "5px";
