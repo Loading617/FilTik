@@ -1,109 +1,59 @@
-function sortVideos(method) {
-    let videos = document.querySelectorAll("div[data-e2e='video-item']");
-    let videoArray = Array.from(videos);
+function injectButton() {
+    if (document.getElementById("sortButton")) return;
 
-    if (!videoArray.length) return;
+    const button = document.createElement("button");
+    button.innerText = "Sort Videos";
+    button.id = "sortButton";
+    button.style.position = "fixed";
+    button.style.top = "10px";
+    button.style.right = "10px";
+    button.style.zIndex = "10000";
+    button.style.padding = "10px";
+    button.style.backgroundColor = "#ff3b5c";
+    button.style.color = "white";
+    button.style.border = "none";
+    button.style.borderRadius = "5px";
+    button.style.cursor = "pointer";
 
-    if (method === "latest") {
-        videoArray.sort((a, b) => new Date(b.dataset.timestamp) - new Date(a.dataset.timestamp));
-    } else if (method === "oldest") {
-        videoArray.sort((a, b) => new Date(a.dataset.timestamp) - new Date(b.dataset.timestamp));
-    } else if (method === "popular") {
-        videoArray.sort((a, b) => b.dataset.likes - a.dataset.likes);
-    } else if (method === "shuffle") {
-        videoArray.sort(() => Math.random() - 0.5);
-    }
-
-    let parent = videos[0].parentNode;
-    videoArray.forEach(video => parent.appendChild(video));
-}
-
-function createSortButton(text, sortMethod) {
-    let button = document.createElement("button");
-    button.innerText = text;
-    button.classList.add("tiktok-sort-btn");
-
-    button.addEventListener("click", () => {
-        sortVideos(sortMethod);
-        chrome.storage.local.set({ sortingMethod: sortMethod });
-    });
-
-    return button;
-}
-
-function addProfileSortButtons() {
-    let filterBar = document.querySelector("div[data-e2e='user-tab-list']");
+    document.body.appendChild(button);
     
-    if (filterBar && !document.querySelector(".tiktok-sort-btn")) {
-        let shuffleButton = createSortButton("🔀 Shuffle", "shuffle");
-        let programButton = createSortButton("📋 Program", "popular");
-
-        filterBar.appendChild(shuffleButton);
-        filterBar.appendChild(programButton);
-    }
+    button.addEventListener("click", sortVideos);
 }
 
-function addFavoritesSortButtons() {
-    let favoritesHeader = document.querySelector("div[data-e2e='favorites-page-header']");
+function sortVideos() {
+    const videos = [...document.querySelectorAll('[data-e2e="user-post-item"]')];
+
+    if (videos.length === 0) {
+        alert("No videos found!");
+        return;
+    }
+
+    const sortMethod = prompt("Enter sorting method: Latest, Popular, Oldest, or Shuffle").toLowerCase();
     
-    if (favoritesHeader && !document.querySelector(".tiktok-sort-btn")) {
-        let buttonContainer = document.createElement("div");
-        buttonContainer.classList.add("tiktok-favorites-sort-container");
-
-        let latestButton = createSortButton("📅 Latest", "latest");
-        let oldestButton = createSortButton("⏳ Oldest", "oldest");
-        let popularButton = createSortButton("🔥 Popular", "popular");
-        let shuffleButton = createSortButton("🔀 Shuffle", "shuffle");
-        let programButton = createSortButton("📋 Program", "popular");
-
-        buttonContainer.append(latestButton, oldestButton, popularButton, shuffleButton, programButton);
-
-        favoritesHeader.appendChild(buttonContainer);
-    }
-}
-
-function addLikedSortButtons() {
-    let likedHeader = document.querySelector("div[data-e2e='liked-videos-header']");
+    let sortedVideos;
     
-    if (likedHeader && !document.querySelector(".tiktok-sort-btn")) {
-        let buttonContainer = document.createElement("div");
-        buttonContainer.classList.add("tiktok-liked-sort-container");
-
-        let latestButton = createSortButton("📅 Latest", "latest");
-        let oldestButton = createSortButton("⏳ Oldest", "oldest");
-        let popularButton = createSortButton("🔥 Popular", "popular");
-        let shuffleButton = createSortButton("🔀 Shuffle", "shuffle");
-        let programButton = createSortButton("📋 Program", "popular");
-
-        buttonContainer.append(latestButton, oldestButton, popularButton, shuffleButton, programButton);
-
-        likedHeader.appendChild(buttonContainer);
-    }
-}
-
-function applyAutoFilter() {
-    chrome.storage.local.get(["sortingMethod", "autoFilter"], (data) => {
-        if (data.autoFilter) {
-            sortVideos(data.sortingMethod || "latest");
-        }
-    });
-}
-
-function detectPageAndInjectButtons() {
-    if (window.location.pathname.includes("/video")) return;
-
-    if (window.location.pathname.includes("/favorites")) {
-        addFavoritesSortButtons();
-    } else if (window.location.pathname.includes("/liked")) {
-        addLikedSortButtons();
+    if (sortMethod === "latest") {
+        sortedVideos = videos.reverse();
+    } else if (sortMethod === "oldest") {
+        sortedVideos = videos;
+    } else if (sortMethod === "popular") {
+        sortedVideos = videos.sort((a, b) => {
+            const viewsA = parseInt(a.querySelector('[data-e2e="video-views"]').textContent.replace(/[^0-9]/g, ""));
+            const viewsB = parseInt(b.querySelector('[data-e2e="video-views"]').textContent.replace(/[^0-9]/g, ""));
+            return viewsB - viewsA;
+        });
+    } else if (sortMethod === "shuffle") {
+        sortedVideos = videos.sort(() => Math.random() - 0.5);
     } else {
-        addProfileSortButtons();
+        alert("Invalid sorting method!");
+        return;
     }
+
+    const container = videos[0].parentNode;
+    container.innerHTML = ""; 
+    sortedVideos.forEach(video => container.appendChild(video));
 }
 
-window.addEventListener("load", () => {
-    setTimeout(() => {
-        detectPageAndInjectButtons();
-        applyAutoFilter();
-    }, 3000);
-});
+window.onload = () => {
+    setTimeout(injectButton, 2000);
+};
