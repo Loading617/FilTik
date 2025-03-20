@@ -17,43 +17,12 @@ function injectButton() {
 
     document.body.appendChild(button);
     
-    button.addEventListener("click", sortVideos);
-}
-
-function sortVideos() {
-    const videos = [...document.querySelectorAll('[data-e2e="user-post-item"]')];
-
-    if (videos.length === 0) {
-        alert("No videos found!");
-        return;
-    }
-
-    const sortMethod = prompt("Enter sorting method: Latest, Popular, Oldest, or Shuffle").toLowerCase();
-    
-    let sortedVideos;
-    
-    if (sortMethod === "latest") {
-        sortedVideos = videos.reverse();
-    } else if (sortMethod === "oldest") {
-        sortedVideos = videos;
-    } else if (sortMethod === "popular") {
-        sortedVideos = videos.sort((a, b) => {
-            const viewsA = parseInt(a.querySelector('[data-e2e="video-views"]').textContent.replace(/[^0-9]/g, ""));
-            const viewsB = parseInt(b.querySelector('[data-e2e="video-views"]').textContent.replace(/[^0-9]/g, ""));
-            return viewsB - viewsA;
-        });
-    } else if (sortMethod === "shuffle") {
-        sortedVideos = videos.sort(() => Math.random() - 0.5);
-    } else {
-        alert("Invalid sorting method!");
-        return;
-    }
-
-    const container = videos[0].parentNode;
-    container.innerHTML = ""; 
-    sortedVideos.forEach(video => container.appendChild(video));
+    button.addEventListener("click", () => {
+        const sortMethod = prompt("Enter sorting method: Latest, Popular, Oldest, or Shuffle").toLowerCase();
+        chrome.runtime.sendMessage({ action: "sortVideos", order: sortMethod });
+    });
 }
 
 window.onload = () => {
-    setTimeout(injectButton, 2000);
+    setTimeout(injectButton, 3000);
 };
