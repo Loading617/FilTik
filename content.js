@@ -5,8 +5,8 @@ function injectButton() {
     button.innerText = "Sort Videos";
     button.id = "sortButton";
     button.style.position = "fixed";
-    button.style.top = "10px";
-    button.style.right = "10px";
+    button.style.top = "218px";
+    button.style.right = "24px";
     button.style.zIndex = "10000";
     button.style.padding = "10px";
     button.style.backgroundColor = "#ff3b5c";
