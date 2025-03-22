@@ -1,78 +1,60 @@
-chrome.runtime.onInstalled.addListener(() => {
-  console.log("FilTik Extension Installed");
-});
-
-chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
-  if (request.action === "sortVideos") {
-      chrome.scripting.executeScript({
-          target: { tabId: sender.tab.id },
-          function: sortVideosOnPage,
-          args: [request.order]
+chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
+  if (message.action === "sortVideos") {
+      chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
+          if (tabs.length > 0) {
+              chrome.scripting.executeScript({
+                  target: { tabId: tabs[0].id },
+                  function: sortVideos,
+                  args: [message.order]
+              });
+          }
       });
   }
 });
 
-function sortVideosOnPage(order) {
-  const selectors = [
-      '[data-e2e="user-post-item"]',
-      '[data-e2e="repost-list-item"]',
-      '[data-e2e="favorite-list-item"]',
-      '[data-e2e="like-list-item"]'
-  ];
+function sortVideos(order) {
+  let videoContainers = document.querySelectorAll("div[data-e2e='user-post-item']");
+  if (!videoContainers.length) return;
 
-  let videos = [];
-  let container;
+  let videosArray = Array.from(videoContainers);
 
-  for (let selector of selectors) {
-      videos = [...document.querySelectorAll(selector)];
-      if (videos.length > 0) {
-          container = videos[0].parentNode;
+  switch (order) {
+      case "latest":
+          videosArray.sort((a, b) => {
+              let dateA = extractDate(a);
+              let dateB = extractDate(b);
+              return dateB - dateA;
+          });
           break;
-      }
+      case "popular":
+          videosArray.sort((a, b) => {
+              let likesA = extractLikes(a);
+              let likesB = extractLikes(b);
+              return likesB - likesA;
+          });
+          break;
+      case "oldest":
+          videosArray.sort((a, b) => {
+              let dateA = extractDate(a);
+              let dateB = extractDate(b);
+              return dateA - dateB;
+          });
+          break;
+      case "shuffle":
+          videosArray.sort(() => Math.random() - 0.5);
+          break;
   }
 
-  if (videos.length === 0) {
-      alert("No videos found!");
-      return;
-  }
-
-  let sortedVideos;
-  
-  if (order === "latest") {
-      sortedVideos = videos.sort((a, b) => {
-          const dateA = extractDate(a);
-          const dateB = extractDate(b);
-          return dateB - dateA;
-      });
-  } else if (order === "oldest") {
-      sortedVideos = videos.sort((a, b) => {
-          const dateA = extractDate(a);
-          const dateB = extractDate(b);
-          return dateA - dateB;
-      });
-  } else if (order === "popular") {
-      sortedVideos = videos.sort((a, b) => {
-          const viewsA = extractViews(a);
-          const viewsB = extractViews(b);
-          return viewsB - viewsA;
-      });
-  } else if (order === "shuffle") {
-      sortedVideos = videos.sort(() => Math.random() - 0.5);
-  } else {
-      alert("Invalid sorting method!");
-      return;
-  }
-
-  container.innerHTML = "";
-  sortedVideos.forEach(video => container.appendChild(video));
-}
-
-function extractViews(videoElement) {
-  const viewElement = videoElement.querySelector('[data-e2e="video-views"]');
-  return viewElement ? parseInt(viewElement.textContent.replace(/[^0-9]/g, "")) : 0;
+  let parent = videoContainers[0].parentNode;
+  videosArray.forEach(video => parent.appendChild(video));
 }
 
 function extractDate(videoElement) {
-  const dateElement = videoElement.querySelector('[data-e2e="video-upload-date"]');
-  return dateElement ? new Date(dateElement.textContent).getTime() : 0;
+  let timestamp = videoElement.querySelector("span[data-e2e='video-create-time']");
+  return timestamp ? new Date(timestamp.textContent).getTime() : 0;
+}
+
+function extractLikes(videoElement) {
+  let likesElement = videoElement.querySelector("strong[data-e2e='video-like-count']");
+  return likesElement ? parseInt(likesElement.textContent.replace(/,/g, "")) || 0 : 0;
 }
