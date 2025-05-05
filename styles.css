@@ -1,0 +1,24 @@
+:root {
+    --primary-color: #000000;
+    --fl-main-font-family: Proxima Nova, sans-serif;
+    --fl-main-font-size: 14px;
+    --fl-main-font-weight: bold;
+}
+
+.filtik-extension-button {
+    position: fixed;
+    top: 80px;
+    right: 20px;
+    background: #ff2d55;
+    color: white;
+    border: none;
+    padding: 10px;
+    font-size: 14px;
+    cursor: pointer;
+    border-radius: 5px;
+    z-index: 9999;
+}
+
+.filtik-extension-button:hover {
+    background: #e60040;
+}
