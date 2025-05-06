@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>FilTik Settings</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="settings">
+    <h2>FilTik Settings</h2>
+
+    <div class="tabs">
+      <button class="tab" data-page="reposts">Reposts</button>
+      <button class="tab" data-page="favorites">Favorites</button>
+      <button class="tab" data-page="liked">Liked</button>
+    </div>
+
+    <div class="filter-section" id="reposts-settings">
+      <h3>Reposts Filters</h3>
+      <label><input type="checkbox" value="latest"> Latest</label>
+      <label><input type="checkbox" value="oldest"> Oldest</label>
+      <label><input type="checkbox" value="popular">Popular</label>
+      <label><input type="checkbox" value="shuffle"> Shuffle</label>
+      <label><input type="checkbox" value="programmed" class="programmed-toggle"> Programmed</label>
+      <div class="programmed-filters hidden">
+        <input type="text" placeholder="Keywords (comma separated)">
+        <input type="text" placeholder="Hashtags (#tag)">
+        <input type="number" placeholder="Min Likes">
+        <input type="text" placeholder="Duration (e.g., 0:15 - 2:00)">
+      </div>
+    </div>
+
+    <div class="filter-section" id="favorites-settings" style="display:none">
+      <h3>Favorites Filters</h3>
+    </div>
+
+    <div class="filter-section" id="liked-settings" style="display:none">
+      <h3>Liked Filters</h3>
+    </div>
+
+    <button class="save-settings">Save Settings</button>
+  </div>
+
+  <script src="settings.js"></script>
+</body>
+</html>
