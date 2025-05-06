@@ -12,13 +12,13 @@ body {
     width: 300px;
   }
   
-  .tabs {
+.tabs {
     display: flex;
     gap: 5px;
     margin-bottom: 15px;
   }
   
-  .tab {
+.tab {
     padding: 6px 10px;
     background: #25F4EE;
     border: none;
@@ -26,15 +26,15 @@ body {
     border-radius: 5px;
   }
   
-  .tab:hover {
+.tab:hover {
     background: #e60040;
   }
   
-  .filter-section {
+.filter-section {
     margin-bottom: 20px;
   }
   
-  .hidden {
+.hidden {
     display: none;
   }
   
