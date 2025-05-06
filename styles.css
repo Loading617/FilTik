@@ -1,9 +1,43 @@
 :root {
     --primary-color: #000000;
+    --secondary-color: #25F4EE;
     --fl-main-font-family: Proxima Nova, sans-serif;
     --fl-main-font-size: 14px;
     --fl-main-font-weight: bold;
 }
+
+body {
+    font-family: Proxima Nova, sans-serif;
+    padding: 15px;
+    width: 300px;
+  }
+  
+  .tabs {
+    display: flex;
+    gap: 5px;
+    margin-bottom: 15px;
+  }
+  
+  .tab {
+    padding: 6px 10px;
+    background: #25F4EE;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+  }
+  
+  .tab:hover {
+    background: #e60040;
+  }
+  
+  .filter-section {
+    margin-bottom: 20px;
+  }
+  
+  .hidden {
+    display: none;
+  }
+  
 
 .filtik-extension-button {
     position: fixed;
