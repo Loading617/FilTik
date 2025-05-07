@@ -2,12 +2,16 @@
   "manifest_version": 3,
   "name": "FilTik",
   "version": "1.0",
+  "background": {
+    "service_worker": "background.js"
+  },
   "description": "Filter TikTok videos on Reposts, Favorites, and Liked pages.",
   "permissions": ["storage"],
   "action": {
     "default_title": "FilTik",
     "default_popup": "popup.html"
   },
+  "options_page": "settings.html",
     "icons": {
       "128": "icons/FilTik128.png"
   }
