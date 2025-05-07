@@ -2,6 +2,10 @@ chrome.runtime.onInstalled.addListener(() => {
   console.log("FilTik Extension Installed");
 });
 
+chrome.action.onClicked.addListener(() => {
+    chrome.runtime.openOptionsPage();
+  });  
+
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
   if (request.action === "sortVideos") {
       chrome.scripting.executeScript({
