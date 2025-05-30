@@ -7,7 +7,7 @@
   "homepage_url": "https://filtik.com",
   
     "action": {
-    "default_popup": "popup.html"
+    "default_popup": "index.html"
   },
 
       "icons": {
