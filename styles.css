@@ -26,3 +26,21 @@ body {
     width: 24px;
     height: 24px;
 }
+
+.github-button {
+    background-color: #e60040;
+    color: #000000;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.changelog-button {
+    background-color: #e60040;
+    color: #000000;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+}
