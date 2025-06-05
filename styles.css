@@ -1,6 +1,7 @@
 body {
-    background-color: #000000;
+    background-color: #010101;
     font-family: "Proxima Nova", sans-serif;
+    text-align: center;
     font-size: 12px;
 }
 
@@ -29,7 +30,7 @@ body {
 
 .help-button {
     background-color: #25F4EE;
-    color: #000000;
+    color: #010101;
     border: none;
     padding: 10px 20px;
     border-radius: 5px;
@@ -38,7 +39,7 @@ body {
 
 .settings-button {
     background-color: #e60040;
-    color: #000000;
+    color: #010101;
     border: none;
     padding: 10px 20px;
     border-radius: 5px;
@@ -47,7 +48,7 @@ body {
 
 .github-button {
     background-color: #25F4EE;
-    color: #000000;
+    color: #010101;
     border: none;
     padding: 10px 20px;
     border-radius: 5px;
@@ -56,7 +57,7 @@ body {
 
 .changelog-button {
     background-color: #e60040;
-    color: #000000;
+    color: #010101;
     border: none;
     padding: 10px 20px;
     border-radius: 5px;
