@@ -10,7 +10,7 @@ body {
 }
 
 .title {
-    color: #25F4EE;
+    color: #e60040;
 }
 
 .developerName {
@@ -18,7 +18,7 @@ body {
 }
 
 .releaseversion {
-    color: #25F4EE;
+    color: #e60040;
 }
 
 .button-container {
@@ -28,7 +28,7 @@ body {
 }
 
 .help-button {
-    background-color: #e60040;
+    background-color: #25F4EE;
     color: #000000;
     border: none;
     padding: 10px 20px;
@@ -46,7 +46,7 @@ body {
 }
 
 .github-button {
-    background-color: #e60040;
+    background-color: #25F4EE;
     color: #000000;
     border: none;
     padding: 10px 20px;
