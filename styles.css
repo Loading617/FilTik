@@ -1,13 +1,15 @@
 body {
+    width: 270px;
+    height: 400px;
     background-color: #010101;
-    font-family: "Proxima Nova", sans-serif;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     text-align: center;
     font-size: 14px;
 }
 
 .logo {
-    width: 30px;
-    height: 30px;
+    width: 100px;
+    height: 100px;
 }
 
 .title {
@@ -32,6 +34,7 @@ body {
 .help-button {
     background-color: #25F4EE;
     color: #010101;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     border: none;
     padding: 10px 20px;
     border-radius: 5px;
@@ -41,6 +44,7 @@ body {
 .settings-button {
     background-color: #e60040;
     color: #010101;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     border: none;
     padding: 10px 20px;
     border-radius: 5px;
@@ -50,6 +54,7 @@ body {
 .github-button {
     background-color: #25F4EE;
     color: #010101;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     border: none;
     padding: 10px 20px;
     border-radius: 5px;
@@ -59,6 +64,7 @@ body {
 .changelog-button {
     background-color: #e60040;
     color: #010101;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     border: none;
     padding: 10px 20px;
     border-radius: 5px;
