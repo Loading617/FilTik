@@ -25,7 +25,7 @@ body {
 }
 
 .button-container {
-    display: grid;
+    display: flex;
     justify-content: center;
     margin-top: 20px;
     gap: 10px;
