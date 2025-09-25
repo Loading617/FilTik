@@ -31,26 +31,6 @@ body {
     gap: 10px;
 }
 
-.rate-button {
-    background-color: #e60040;
-    color: #010101;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
-.help-button {
-    background-color: #25F4EE;
-    color: #010101;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
 .settings-button {
     background-color: #e60040;
     color: #010101;
@@ -71,7 +51,7 @@ body {
     cursor: pointer;
 }
 
-.changelog-button {
+.release-notes-button {
     background-color: #e60040;
     color: #010101;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
