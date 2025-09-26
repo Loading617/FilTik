@@ -2,7 +2,7 @@ body {
     width: 270px;
     height: 400px;
     background-color: #010101;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font: 'Segoe UI';
     text-align: center;
     font-size: 14px;
 }
@@ -34,7 +34,7 @@ body {
 .settings-button {
     background-color: #e60040;
     color: #010101;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font: 'Segoe UI';
     border: none;
     padding: 10px 20px;
     border-radius: 5px;
@@ -44,7 +44,7 @@ body {
 .github-button {
     background-color: #25F4EE;
     color: #010101;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font: 'Segoe UI';
     border: none;
     padding: 10px 20px;
     border-radius: 5px;
@@ -54,7 +54,7 @@ body {
 .release-notes-button {
     background-color: #e60040;
     color: #010101;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font: 'Segoe UI';
     border: none;
     padding: 10px 20px;
     border-radius: 5px;
