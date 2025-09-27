@@ -3,4 +3,4 @@
 </p>
 
 # FilTik
-Filter TikTok Profile Videos, Saved Videos, Reposted Videos & Like Videos also Shuffle & Program Extension
+Filter TikTok Profile Videos, Saved Videos, Reposted Videos & Liked Videos by Shuffle & Program Extension
