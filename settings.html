@@ -3,40 +3,49 @@
 <head>
   <title>FilTik Settings</title>
   <link rel="stylesheet" type="text/css" href="styles.css">
-  <script type="text/javascript" src="./js/settings.js"></script>
+  <script src="./js/background.js"></script>
+  <script src="./js/settings.js"></script>
 </head>
 <body>
-  <div class="settings">
+  <div class="header">
     <h2>FilTik Settings</h2>
 
-    <div class="tabs">
-      <button class="tab" data-page="reposts">Reposts</button>
-      <button class="tab" data-page="favorites">Favorites</button>
-      <button class="tab" data-page="liked">Liked</button>
-    </div>
+    <div class="layout-selector"></div>
+    <select>
+      <label value="playlist-layout">Playlist Layout</label>
+      <br>
+      <input type="radio" name="layout" value="playlist-layout">
+      <label value="video-layout">Video Layout</label>
+      <br>
+      <input type="radio" name="layout" value="video-layout">
+    </select>
 
-    <div class="filter-section" id="reposts-settings">
-      <h3>Reposts Filters</h3>
-      <label><input type="checkbox" value="latest">Latest</label>
-      <label><input type="checkbox" value="oldest">Oldest</label>
-      <label><input type="checkbox" value="popular">Popular</label>
-      <label><input type="checkbox" value="shuffle">Shuffle</label>
-      <label><input type="checkbox" value="programmed" class="programmed-toggle"> Programmed</label>
-      <div class="programmed-filters hidden">
-        <input type="text" placeholder="Keywords (comma separated)">
-        <input type="text" placeholder="Hashtags (#tag)">
-        <input type="number" placeholder="Min Likes">
-        <input type="text" placeholder="Duration (e.g., 0:15 - 2:00)">
-      </div>
-    </div>
+    <div class="video-sort-by"></div>
+    <select>
+      <label value="video-sort-by">Video Sort By</label>
+      <br>
+      <input type="radio" name="video" value="latest">
+      <label value="latest">Latest</label>
+      <br>
+      <input type="radio" name="video" value="oldest">
+      <label value="oldest">Oldest</label>
+      <br>
+      <input type="radio" name="video" value="popular">
+      <label value="popular">Popular</label>
 
-    <div class="filter-section" id="favorites-settings" style="display:none">
-      <h3>Favorites Filters</h3>
-    </div>
+    </select>
 
-    <div class="filter-section" id="liked-settings" style="display:none">
-      <h3>Liked Filters</h3>
-    </div>
+    <div class="playlist-sort-by"></div>
+      <label class="switch">
+        <input type="checkbox">
+        <span class="slider-circle"></span>
+      </label>
+
+    <div class="video-sort-by"></div>
+      <label class="switch">
+        <input type="checkbox">
+        <span class="slider-circle"></span>
+      </label>
 
     <button class="save-settings">Save Settings</button>
   </div>
