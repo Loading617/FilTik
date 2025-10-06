@@ -12,17 +12,7 @@ body {
     height: 100px;
 }
 
-#header {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
 .title {
-    color: #e60040;
-}
-
-#title {
     color: #e60040;
 }
 
@@ -30,15 +20,7 @@ body {
     color: #25F4EE;
 }
 
-#developerName {
-    color: #25F4EE;
-}
-
 .releaseversion {
-    color: #e60040;
-}
-
-#releaseversion {
     color: #e60040;
 }
 
@@ -49,24 +31,7 @@ body {
     gap: 10px;
 }
 
-#button-container {
-    display: flex;
-    justify-content: center;
-    margin-top: 20px;
-    gap: 10px;
-}
-
 .settings-button {
-    background-color: #e60040;
-    color: #010101;
-    font: 'Segoe UI';
-    border: none;
-    padding: 10px 20px;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
-#settings-button {
     background-color: #e60040;
     color: #010101;
     font: 'Segoe UI';
@@ -86,27 +51,7 @@ body {
     cursor: pointer;
 }
 
-#github-button {
-    background-color: #25F4EE;
-    color: #010101;
-    font: 'Segoe UI';
-    border: none;
-    padding: 10px 20px;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
 .release-notes-button {
-    background-color: #e60040;
-    color: #010101;
-    font: 'Segoe UI';
-    border: none;
-    padding: 10px 20px;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
-#release-notes-button {
     background-color: #e60040;
     color: #010101;
     font: 'Segoe UI';
